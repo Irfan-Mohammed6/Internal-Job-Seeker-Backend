@@ -51,7 +51,9 @@ def get_openings():
                     elif "ic-16-briefcase" in icon['class']:
                         experience = item.text.strip()
                     elif "ic-16-money" in icon['class']:
-                        salary = item.text.strip()
+                        salary_tags = item.find_all('span')
+                        salaries = [tag.text.strip() for tag in salary_tags if tag.text.strip()]
+                        salary = salaries[0] if salaries else ""
 
                 job_data = {
                     "title": job_title,
